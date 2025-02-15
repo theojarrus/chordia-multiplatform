@@ -1,0 +1,15 @@
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("convention.android.common")
+}
+
+android {
+    defaultConfig {
+        versionCode 1
+    }
+
+    kotlinOptions {
+        jvmTarget = "21"
+    }
+}

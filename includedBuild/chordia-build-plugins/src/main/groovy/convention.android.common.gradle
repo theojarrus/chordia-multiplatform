@@ -1,0 +1,21 @@
+android {
+
+    namespace = "com.neotive.chordia.${project.name.replace("-", ".")}"
+
+    defaultConfig {
+        compileSdk = 36
+        targetSdk = 36
+        minSdk = 24
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+}

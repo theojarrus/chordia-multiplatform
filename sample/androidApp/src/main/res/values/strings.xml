@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="chordia">Chordia</string>
+    <string name="screen_main_primary_button_label">Generate</string>
+    <string name="screen_settings_primary_button_label">Apply</string>
+</resources>
