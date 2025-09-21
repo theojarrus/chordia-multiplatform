@@ -48,7 +48,7 @@ private fun ChordiaWebSampleApp() {
         configurationManager.set(BaseRenderingComposerConfiguration::scale to 20f)
     }
 
-    val instrument = Instrument(Type.Strings, Length.Guitar.Standard, Drop.Guitar.Standard)
+    val instrument = Instrument(Type.Strings, Length.Guitar.Standard, Drop.Guitar.Standard, true)
     val pattern = Pattern.Major
     val note = Note.C
     val parameters = Parameters(instrument, pattern, note)
