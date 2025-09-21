@@ -6,7 +6,7 @@ plugins {
 
 android {
     defaultConfig {
-        versionCode 1
+        versionCode 3
     }
 
     kotlinOptions {
