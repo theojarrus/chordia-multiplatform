@@ -23,7 +23,6 @@ class BaseGenerationStringsTabulator : GenerationTabulatorDelegate {
     private fun StringsTabulatorBinding.tabulatnew(variants: List<Variant>): List<Variant> {
         return variants.map { variant ->
             variant.points
-                .filterNot { it.position == OPEN.value }
                 .sortedBy(Point::position)
                 .let { points ->
                     var counter = 1
@@ -33,6 +32,9 @@ class BaseGenerationStringsTabulator : GenerationTabulatorDelegate {
                         .mapIndexed { index, point ->
                             val row = variant.rows.associateBy(Row::position)[point.position]
                             when {
+                                point.position == OPEN.value -> {
+                                    point
+                                }
                                 point.line == row?.start -> {
                                     offset = getOffset(points, point, index, offset)
                                     point.copy(hint = counter + offset)
@@ -52,6 +54,7 @@ class BaseGenerationStringsTabulator : GenerationTabulatorDelegate {
                             }
                         }
                         .toList()
+                        .sortedBy(Point::line)
                         .let { variant.copy(points = it) }
                 }
         }
