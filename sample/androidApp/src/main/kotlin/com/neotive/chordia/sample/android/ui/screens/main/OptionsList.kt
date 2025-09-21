@@ -22,6 +22,13 @@ object OptionsList {
                 onSet = { update(instrument.copy(type = it)) }
             ),
             MultipleOption(
+                title = "Ordered",
+                values = listOf(true, false),
+                active = { instrument.ordered },
+                shortFormatter = { it.toString().replaceFirstChar(Char::uppercase) },
+                onSet = { update(instrument.copy(ordered = it)) }
+            ),
+            MultipleOption(
                 title = "Length",
                 values = listOf(
                     Length.Guitar.Standard,
@@ -78,8 +85,9 @@ object OptionsList {
             MultipleOption(
                 title = "Presets",
                 values = listOf(
-                    Pair("Guitar (Standart)", Instrument(Strings, Length.Guitar.Standard, Drop.Guitar.Standard)),
-                    Pair("Piano (Standart)", Instrument(Keys, Length.Piano.Standard, Drop.Piano.Standard))
+                    Pair("Guitar (Standart)", Instrument(Strings, Length.Guitar.Standard, Drop.Guitar.Standard, true)),
+                    Pair("Piano (Standart)", Instrument(Keys, Length.Piano.Standard, Drop.Piano.Standard, true)),
+                    Pair("Ukulele (Standart)", Instrument(Strings, Length.Ukulele.Standard, Drop.Ukulele.Standard, false))
                 ),
                 active = { null },
                 shortFormatter = { it.first },

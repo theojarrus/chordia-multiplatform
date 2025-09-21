@@ -1,6 +1,7 @@
 package com.neotive.chordia.generation.base.tool.strings
 
 import com.neotive.chordia.configuration.model.Configuration
+import com.neotive.chordia.core.model.Instrument
 import com.neotive.chordia.core.model.Point
 import com.neotive.chordia.core.model.Position.OPEN
 import com.neotive.chordia.core.model.Row
@@ -22,16 +23,20 @@ class BaseGenerationStringsValidator(
     }
 
     override fun isValid(configuration: Configuration, chord: Chord, variant: Variant): Boolean {
-        return StringsValidatorBinding(configuration).isValid(chord, variant)
+        return StringsValidatorBinding(configuration).isValid(configuration.parameters.instrument, chord, variant)
     }
 
     override fun getOrNull(configuration: Configuration, chord: Chord, variant: Variant): Variant? {
         return StringsValidatorBinding(configuration).getOrNull(chord, variant)
     }
 
-    private fun StringsValidatorBinding.isValid(chord: Chord, variant: Variant): Boolean {
+    private fun StringsValidatorBinding.isValid(
+        instrument: Instrument,
+        chord: Chord,
+        variant: Variant
+    ): Boolean {
         return listOf(
-            { filterFirstTonic(chord, variant) },
+            { filterFirstTonic(instrument, chord, variant) },
             { filterOpenedPositions(variant) },
             { filterAbsoluteRange(variant) },
             { filterAdjacentRange(variant) },
@@ -49,8 +54,12 @@ class BaseGenerationStringsValidator(
             }
     }
 
-    private fun StringsValidatorBinding.filterFirstTonic(chord: Chord, variant: Variant): Boolean {
-        return variant.points.firstOrNull()?.note == chord.firstOrNull()
+    private fun StringsValidatorBinding.filterFirstTonic(
+        instrument: Instrument,
+        chord: Chord,
+        variant: Variant
+    ): Boolean {
+        return !instrument.ordered || variant.points.firstOrNull()?.note == chord.firstOrNull()
     }
 
     private fun StringsValidatorBinding.filterOpenedPositions(variant: Variant): Boolean {

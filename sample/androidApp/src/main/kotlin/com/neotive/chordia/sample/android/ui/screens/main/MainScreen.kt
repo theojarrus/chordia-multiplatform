@@ -65,7 +65,8 @@ class MainScreen : Screen {
                 Instrument(
                     Strings,
                     Length.Guitar.Standard,
-                    Drop.Guitar.Standard
+                    Drop.Guitar.Standard,
+                    true
                 )
             )
         }
